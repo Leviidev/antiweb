@@ -142,7 +142,8 @@ export class WsBroker {
         cwd = session.workspacePath;
       }
     }
-    await this.terminalManager.getPtyManager().ensurePty(targetId, cwd, cols, rows, process.env.SHELL || 'bash', []);
+    const defaultShell = process.platform === 'win32' ? (process.env.COMSPEC || 'powershell.exe') : (process.env.SHELL || 'bash');
+    await this.terminalManager.getPtyManager().ensurePty(targetId, cwd, cols, rows, defaultShell, []);
   }
 
   private async handleClientMessage(client: ClientConnection, msg: WsClientMessage): Promise<void> {

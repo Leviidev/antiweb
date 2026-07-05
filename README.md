@@ -5,6 +5,7 @@
 **The Production-Quality Web Interface & Vibe Coding Studio for Antigravity CLI**
 
 [![npm version](https://img.shields.io/npm/v/@leviidev/antiweb?color=2dd4bf&label=npm&style=flat-square)](https://www.npmjs.com/package/@leviidev/antiweb)
+[![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS%20%7C%20Windows-blue?style=flat-square)](https://antiweb.lol)
 [![License: MIT](https://img.shields.io/badge/License-MIT-fab283.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![Vibe Coding](https://img.shields.io/badge/Vibe%20Coding-100%25-8b5cf6?style=flat-square)](https://antiweb.lol)
 [![Linux Desktop](https://img.shields.io/badge/Linux%20Desktop-Supported-22c55e?style=flat-square)](#native-linux-desktop-app)
@@ -23,7 +24,7 @@ Jump into any project directory or git repository on your machine and launch Ant
 npx @leviidev/antiweb
 ```
 
-*This spins up a high-performance Fastify gateway on port `3000` and automatically connects your default browser.*
+*This spins up a high-performance Fastify gateway on port `3000` and automatically connects your default browser (works seamlessly across Linux, macOS, and Windows).*
 
 ---
 
@@ -43,8 +44,8 @@ If tools like Cursor and Windsurf brought AI autocomplete to traditional editors
 ## ✨ Key Features
 
 ### 🖥️ Dual-Mode PTY Architecture
-Unlike standard chat wrappers that trap your command execution, AntiWeb uses `node-pty` to give you a real, unrestricted bash shell directly inside your project workspace. 
-- **`[ >_ Bash Terminal ]`**: Run git commands, execute tests (`npm run test`), and start dev servers.
+Unlike standard chat wrappers that trap your command execution, AntiWeb uses `node-pty` to give you a real, unrestricted shell directly inside your project workspace (**Bash/Zsh** on Linux & macOS, **PowerShell/CMD** on Windows). 
+- **`[ >_ Terminal ]`**: Run git commands, execute tests (`npm run test`), and start dev servers.
 - **`[ ✨ AGY CLI ]`**: Toggle instantly into the underlying Antigravity CLI interactive viewport whenever you need deep agent debugging.
 
 ### 📝 Live Diff Verification & Auto-Accept

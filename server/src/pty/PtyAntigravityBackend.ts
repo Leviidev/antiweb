@@ -31,7 +31,8 @@ export class PtyAntigravityBackend implements IAntigravityBackend {
       this.kill(sessionId);
     }
 
-    let cmd = command || config.agyCommand || 'bash';
+    const defaultShell = process.platform === 'win32' ? (process.env.COMSPEC || 'powershell.exe') : (process.env.SHELL || 'bash');
+    let cmd = command || config.agyCommand || defaultShell;
     const homeDir = process.env.HOME || os.homedir();
 
     // Resolve agy command path robustly across environments
@@ -104,9 +105,9 @@ export class PtyAntigravityBackend implements IAntigravityBackend {
         env: env as { [key: string]: string }
       });
     } catch (err) {
-      // Fallback to bash if command (e.g. agy) not found
-      console.warn(`Failed to spawn "${cmd}", falling back to bash:`, err);
-      ptyProcess = pty.spawn('bash', [], {
+      // Fallback to default shell if command (e.g. agy) not found
+      console.warn(`Failed to spawn "${cmd}", falling back to ${defaultShell}:`, err);
+      ptyProcess = pty.spawn(defaultShell, [], {
         name: 'xterm-256color',
         cols,
         rows,

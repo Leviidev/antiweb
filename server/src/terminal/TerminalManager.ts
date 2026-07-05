@@ -53,7 +53,7 @@ export class TerminalManager {
     this.tabs.set(id, tab);
     this.saveTabs();
 
-    const shell = process.env.SHELL || 'bash';
+    const shell = process.platform === 'win32' ? (process.env.COMSPEC || 'powershell.exe') : (process.env.SHELL || 'bash');
     await this.ptyManager.ensurePty(id, tab.cwd, 80, 24, shell, []);
     return tab;
   }
@@ -62,7 +62,7 @@ export class TerminalManager {
     const tab = this.tabs.get(id);
     if (!tab) return undefined;
 
-    const shell = process.env.SHELL || 'bash';
+    const shell = process.platform === 'win32' ? (process.env.COMSPEC || 'powershell.exe') : (process.env.SHELL || 'bash');
     await this.ptyManager.ensurePty(id, tab.cwd, cols, rows, shell, []);
     tab.ptyStatus = 'running';
     this.saveTabs();

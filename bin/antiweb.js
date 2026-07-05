@@ -108,6 +108,19 @@ function printBanner(publicPort) {
 }
 
 function openApp(url) {
+  if (process.platform === 'win32') {
+    console.log(`🚀 Launching default web browser on Windows...`);
+    const child = spawn('cmd', ['/c', 'start', '', url], { detached: true, stdio: 'ignore' });
+    child.unref();
+    return;
+  }
+  if (process.platform === 'darwin') {
+    console.log(`🚀 Launching default web browser on macOS...`);
+    const child = spawn('open', [url], { detached: true, stdio: 'ignore' });
+    child.unref();
+    return;
+  }
+
   const hasGui = !!(process.env.DISPLAY || process.env.WAYLAND_DISPLAY);
   if (!hasGui) {
     console.log(`ℹ️ No GUI display detected on this machine. Use the URL above in your browser!`);
@@ -180,7 +193,11 @@ async function stop(publicPort = 3000, internalPort = 3001) {
   const internalUp = await checkPort(internalPort);
   if (publicUp || internalUp) {
     try {
-      spawnSync('fuser', ['-k', `${publicPort}/tcp`, `${internalPort}/tcp`], { stdio: 'ignore' });
+      if (process.platform === 'win32') {
+        spawnSync('taskkill', ['/F', '/IM', 'node.exe'], { stdio: 'ignore' });
+      } else {
+        spawnSync('fuser', ['-k', `${publicPort}/tcp`, `${internalPort}/tcp`], { stdio: 'ignore' });
+      }
       stopped = true;
     } catch (e) {}
   }
@@ -193,6 +210,10 @@ async function stop(publicPort = 3000, internalPort = 3001) {
 }
 
 function installDesktop() {
+  if (process.platform === 'win32' || process.platform === 'darwin') {
+    console.log(`ℹ️ --install-desktop is currently customized for Linux desktop environments (.desktop files). On Windows/macOS, simply run 'antiweb' or 'npm i -g @leviidev/antiweb' to use from any terminal!`);
+    return;
+  }
   console.log(`📦 Installing AntiWeb as a Linux Desktop Application...`);
 
   const localBin = path.join(os.homedir(), '.local', 'bin');
