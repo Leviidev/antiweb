@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root, .dark {
+    /* OpenCode Web Studio Slate/Charcoal Dark Palette matching reference image */
+    --background: 220 14% 6%;       /* #0e0f12 Deep Slate Black Base */
+    --foreground: 220 10% 95%;      /* #f3f4f6 High Contrast Off-White Text */
+    --card: 225 12% 9%;             /* #14151a Main Pane / Card Surface */
+    --card-foreground: 220 10% 95%;
+    --popover: 225 12% 9%;
+    --popover-foreground: 220 10% 95%;
+    --primary: 172 66% 50%;         /* #2dd4bf OpenCode Cyan/Teal Inline Highlight */
+    --primary-foreground: 220 14% 6%;
+    --secondary: 225 12% 13%;       /* #1d1e26 Raised Surface / Input Box */
+    --secondary-foreground: 220 10% 95%;
+    --muted: 225 12% 13%;           /* #1d1e26 Muted Panels */
+    --muted-foreground: 220 8% 55%; /* #858a93 Cool Grey Secondary Text */
+    --accent: 225 13% 16%;          /* #23252f Active / Hover Pill Surface */
+    --accent-foreground: 220 10% 95%;
+    --destructive: 0 84% 60%;       /* #ef4444 OpenCode Error Red */
+    --destructive-foreground: 220 10% 95%;
+    --border: 225 12% 16%;          /* #23252f Sleek Slate Border Base */
+    --input: 225 12% 16%;
+    --ring: 172 66% 50%;            /* #2dd4bf Cyan Focus Accent */
+    --radius: 0.75rem;              /* 12px sleek rounded-xl OpenCode corners */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased font-sans selection:bg-[#2dd4bf]/20 selection:text-[#2dd4bf] overflow-hidden;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* OpenCode Web Studio design tokens & custom scrollbars */
+.opencode-panel {
+  @apply bg-[#14151a] border border-[#23252f] shadow-2xl rounded-2xl;
+}
+
+.opencode-surface {
+  @apply bg-[#1d1e26] border border-[#23252f] hover:border-[#38bdf8]/40 transition-all duration-200 shadow-sm rounded-xl;
+}
+
+.opencode-gradient-btn {
+  @apply bg-[#23252f] hover:bg-[#2c2f3c] text-white font-medium border border-white/10 shadow-sm transition-all duration-200;
+}
+
+/* Sleek custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-[#2c2f3c]/60 rounded-full hover:bg-[#3d4154] transition-colors;
+}
+
+/* xterm.js terminal styling overrides */
+.xterm .xterm-viewport {
+  background-color: transparent !important;
+  overflow-y: auto !important;
+}
+.xterm .xterm-screen {
+  padding: 0.75rem;
+}

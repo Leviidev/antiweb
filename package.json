@@ -1,0 +1,73 @@
+{
+  "name": "@leviidev/antiweb",
+  "version": "1.0.0",
+  "description": "Production-quality web interface for the Antigravity CLI - https://antiweb.lol",
+  "homepage": "https://antiweb.lol",
+  "bin": {
+    "antiweb": "./bin/antiweb.js"
+  },
+  "files": [
+    "bin",
+    "shared/dist",
+    "shared/package.json",
+    "server/dist",
+    "server/package.json",
+    "client/.next",
+    "client/package.json",
+    "client/public"
+  ],
+  "workspaces": [
+    "shared",
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build:shared": "npm run build --workspace=shared",
+    "build:server": "npm run build --workspace=server",
+    "build:client": "npm run build --workspace=client",
+    "build": "npm run build:shared && npm run build:server && npm run build:client",
+    "dev:shared": "npm run dev --workspace=shared",
+    "dev:server": "npm run dev --workspace=server",
+    "dev:client": "npm run dev --workspace=client",
+    "dev": "npm run build:shared && concurrently \"npm run dev:shared\" \"npm run dev:server\" \"npm run dev:client\"",
+    "start": "node bin/antiweb.js",
+    "install-app": "node bin/antiweb.js --install-desktop",
+    "lint": "npm run lint --workspaces"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^9.3.1",
+    "@fastify/cors": "^9.0.1",
+    "@fastify/csrf-protection": "^7.0.1",
+    "@fastify/http-proxy": "^9.5.0",
+    "@fastify/multipart": "^8.3.0",
+    "@fastify/rate-limit": "^9.1.0",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-dropdown-menu": "^2.1.1",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@radix-ui/react-tabs": "^1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.2",
+    "@xterm/addon-fit": "^0.10.0",
+    "@xterm/addon-web-links": "^0.11.0",
+    "@xterm/xterm": "^5.5.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.28.1",
+    "lucide-react": "^0.418.0",
+    "next": "^14.2.5",
+    "node-pty": "npm:@homebridge/node-pty-prebuilt-multiarch@^0.13.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-dropzone": "^14.2.3",
+    "react-markdown": "^9.0.1",
+    "react-syntax-highlighter": "^15.5.0",
+    "remark-gfm": "^4.0.0",
+    "tailwind-merge": "^2.4.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "typescript": "^5.4.5"
+  }
+}
